@@ -1,2 +1,10 @@
 <?php
-class 
+
+class home{
+
+    public function index(){
+        echo "Đây là trang chủ";
+    }
+
+}
+?>
