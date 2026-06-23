@@ -11,7 +11,11 @@ class sinhvien extends Controller{
     }
 
     public function create(){
-        $this->view('sinhvien/create');
+         $lophocModel = $this->model('lophocModel');
+        $lophocs = $lophocModel->getAll(); 
+        
+        require_once '../app/views/partial/header.php';
+            require_once '../app/views/sinhvien/create.php';
     }
 
     public function store(){
