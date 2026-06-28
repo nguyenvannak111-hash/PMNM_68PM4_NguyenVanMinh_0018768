@@ -12,7 +12,7 @@
             try{
   
                 //this->conn = new mysqli($this ->host, $this->username, $this->password, $this->db_name);
-                $self->conn = new PDO('mysql:host=' . $self->host . ';dbname=' . $self->db_name, $self->username, $self->password);
+                $self->conn = new PDO('mysql:host=' . $self->host . ';dbname=minhnv_0018768_DB' . $self->db_name, $self->username, $self->password);
 
                 $self->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }catch(PDOException $e){

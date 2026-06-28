@@ -9,47 +9,60 @@ class sinhvien extends Controller{
         $totalpage = $result['totalpage'];
         $this->view('layout/masterlayout', ['viewname' => 'sinhvien/index', 'sinhviens' => $sinhviens, 'title' => 'Danh sách sinh viên', 'totalpage'=>$totalpage]);
     }
-
     public function create(){
          $lophocModel = $this->model('lophocModel');
         $lophocs = $lophocModel->getAll(); 
-        
-        require_once '../app/views/partial/header.php';
-            require_once '../app/views/sinhvien/create.php';
+     
+        $this->view("layout/masterlayout", [
+            'viewname' => 'sinhvien/create',
+            'lophocs' => $lophocs,
+            'title' => 'Thêm sinh viên mới'
+        ]);
     }
+
 
     public function store(){
         if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
             $hoten = $_POST['hoten'] ??'';
             $gioitinh = $_POST['gioitinh'] ??'';
             $mssv = $_POST['mssv'] ??'';
+            $malop = $_POST['malop'] ?? '';
             $sinhvienModel = $this->model('sinhvienModel');
-            $result = $sinhvienModel->create($hoten, $gioitinh, $mssv);
+            $result = $sinhvienModel->create($hoten, $gioitinh, $mssv,$malop);
             if($result){
-                echo "Thêm mới thành công";
-            }else{
-                echo "Thêm mới thất bại";
-            }
+            header("Location: /sinhvien/index"); 
+            exit();
         }
     }
+    }
 
-    public function edit($id){
+  public function edit($id) {
         $sinhvienModel = $this->model('sinhvienModel');
-        $sinhvien = $sinhvienModel->getById($id);
-        $this->view('sinhvien/edit', ['sinhvien' => $sinhvien]);
+        $sinhvien = $sinhvienModel->getSinhvienById($id);
+
+        $lophocModel = $this->model('lophocModel');
+        $lophocs = $lophocModel->getAll();
+        $this->view("layout/masterlayout", [
+            'viewname' => 'sinhvien/edit',
+            'sinhvien' => $sinhvien,
+            'lophocs' => $lophocs,
+            'title' => 'Chỉnh sửa sinh viên'
+        ]);
     }
 
     public function update($id){
         if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
             $hoten = $_POST['hoten'] ??'';
             $gioitinh = $_POST['gioitinh'] ??'';
+            $malop = $_POST['malop'] ?? '';
             $mssv = $_POST['mssv'] ??'';
             $sinhvienModel = $this->model('sinhvienModel');
-            $result = $sinhvienModel->update($id, $hoten, $gioitinh, $mssv);
+            $result = $sinhvienModel->update($id, $hoten, $gioitinh, $mssv,$malop);
             if($result){
-                echo "Cập nhật thành công";
-            }else{
-                echo "Cập nhật thất bại";
+                header("Location: /sinhvien/index");
+                exit();
+            } else {
+                echo "Lỗi khi cập nhật dữ liệu.";
             }
         }
     }
@@ -58,10 +71,9 @@ class sinhvien extends Controller{
         $sinhvienModel = $this->model('sinhvienModel');
         $result = $sinhvienModel->delete($id);
         if($result){
-            echo "Xóa thành công";
-        }else{
-            echo "Xóa thất bại";
+             header("Location: /sinhvien/index");
+            } else {
+            echo "Lỗi khi xóa sinh viên.";
         }
     }
-}
 ?>

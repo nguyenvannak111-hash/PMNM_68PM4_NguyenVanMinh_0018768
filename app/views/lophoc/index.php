@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($title) ? $title : 'Danh sách sinh viên'; ?></title>
+    <title><?php echo isset($title) ? $title : 'Danh sách lớp học'; ?></title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -15,7 +15,7 @@
         .content-container {
             padding: 30px; 
             padding-bottom: 100px; 
-            max-width: 1200px;
+            max-width: 90%;
             margin: 0 auto;
         }
 
@@ -62,7 +62,7 @@
             background-color: #3498db;
             color: white;
             font-weight: 600;
-            padding: 14px 16px;
+            padding: 14px 12px;
             text-transform: uppercase;
             font-size: 13px;
         }
