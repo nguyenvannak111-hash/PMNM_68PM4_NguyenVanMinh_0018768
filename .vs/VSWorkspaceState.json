@@ -4,10 +4,12 @@
     "\\app",
     "\\app\\controllers",
     "\\app\\core",
+    "\\app\\models",
     "\\app\\views",
     "\\app\\views\\home",
-    "\\app\\views\\sinhvien"
+    "\\app\\views\\sinhvien",
+    "\\public"
   ],
-  "SelectedNode": "\\app\\views\\sinhvien\\index.php",
+  "SelectedNode": "\\public\\.htaccess",
   "PreviewInSolutionExplorer": false
 }

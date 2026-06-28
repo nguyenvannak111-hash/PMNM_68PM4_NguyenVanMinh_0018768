@@ -2,12 +2,23 @@
 require_once '../app/core/controller.php';
 class sinhvien extends Controller{
 
-    public function index($limit = 5, $offset = 0, $search=""){
+   public function index($limit = 5, $offset = 0) {
+        $limit = is_numeric($limit) ? (int)$limit : 5;
+        $offset = is_numeric($offset) ? (int)$offset : 0;
+
+        $search = $_GET['search'] ?? "";
+        
         $sinhvienModel = $this->model('sinhvienModel');
         $result = $sinhvienModel->paging($limit, $offset, $search);
         $sinhviens = $result['sinhviens'];
         $totalpage = $result['totalpage'];
-        $this->view('layout/masterlayout', ['viewname' => 'sinhvien/index', 'sinhviens' => $sinhviens, 'title' => 'Danh sách sinh viên', 'totalpage'=>$totalpage]);
+          $this->view("layout/masterlayout", [
+            'viewname' => 'sinhvien/index', 
+            'sinhviens' => $sinhviens, 
+            'title' => 'Quản lý sinh viên', 
+            'totalPage' => $totalPage,
+            'search' => $search
+        ]);
     }
     public function create(){
          $lophocModel = $this->model('lophocModel');
